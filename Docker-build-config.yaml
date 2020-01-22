@@ -1,0 +1,47 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: '2020-01-22T03:44:11Z'
+  labels:
+    app: welcome
+  name: welcome-docker
+  namespace: myproject
+  resourceVersion: '129914'
+  selfLink: /apis/build.openshift.io/v1/namespaces/myproject/buildconfigs/welcome
+  uid: 7399a301-3cc9-11ea-a497-080027b667b5
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'welcome:latest'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: 'https://github.com/icseibel/Welcome.git'
+    sourceSecret:
+      name: igor-github
+    type: Git
+  strategy:
+    dockerStrategy:
+        dockerfilePath: "Dockerfile"
+        noCache: true
+  triggers:
+    - generic:
+        secret: a2212da84772ed61
+      type: Generic
+    - github:
+        secret: e75c27014ed1f52e
+      type: GitHub
+    - imageChange:
+        lastTriggeredImageID: >-
+          172.30.1.1:5000/openshift/python@sha256:e1e6c06dca6ccf6ec30f2bee25926b21607f399d9b0b59ea37fd8ec3b940b3bd
+      type: ImageChange
+    - type: ConfigChange
+status:
+  lastVersion: 2
