@@ -30,7 +30,7 @@ spec:
   strategy:
     dockerStrategy:
         dockerfilePath: "Dockerfile"
-        noCache: true
+        noCache: false
   triggers:
     - generic:
         secret: a2212da84772ed61
